@@ -1,34 +1,125 @@
-let B be a 2-d array representing the pieces on the board
-let L be an empty list
-let max_rounds = 0
+Fundamentally, this algorithm runs a Breadth-First Search from all of the
+white pieces on the board, flipping black pieces to white as they are found.
+At the end, the last black piece to be flipped will, by BFS's definition, have
+the maximum possible round number (manhattan distance to nearest original white
+piece). Similarly, any black piece remaining on the board when the search 
+terminates is by definition unreachable.
 
-for all tile in B
-    if tile contains a white piece
-        add tile coordinates to L with rounds = 0
+The main interface to the algorithm is the Gone.PROCESS_GAME() method.
 
-while L is not empty
-    let t be the first element in L
-    remove t from L
-    process t according to PROCESS_TILE(t, L, B) below
-    set max_rounds = max(max_rounds, t.rounds)
-
-let any_black = false
-for all tile in B
-    if tile contains a black piece
-        any_black = true
-        exit loop
-
-return max_rounds, any_black
+This algorithm is broken down into the following classes, methods, and enum:
 
 
 
-PROCESS_TILE(t, L, B)
-    Let A contain the tiles north, east, south, and west of t
+The Gone class exposes methods necessary to process an input game board and
+return the required number of rounds and whether or not any black pieces remain
+at the end.
 
-    for all u in A
-        if u contains a black piece
-            update B to replace the piece at u with a white piece
-            set u.rounds = t.rounds + 1
-            add u to end of L 
+Class Gone
+    _board = an instance of the Board class generated from the input array
+    _white_tiles = a doubly linked list of SearchPositions (all white tiles)
+    _black_tiles = a doubly linked list of SearchPositions (all black tiles)
+    _max_rounds = the maximum number of rounds required to reach a black tile
 
-    return t.rounds
+
+    PROCESS_GAME(2d_array_board)
+        Generate a new Board instance from 2d_array_board and store in _board
+        _white_tiles, _black_tiles = _board.TO_SORTED_LINKED_LISTS()
+
+        SIMULATE_GAME()
+
+        Return MAX_ROUNDS(), ANY_BLACK_REMAINING()
+
+
+    SIMULATE_GAME()
+        While _white_tiles is not empty
+            Let tile be the first element in _white_tiles
+            Remove tile from _white_tiles
+
+            ADD_NEIGHBORS_TO_NEXT_ROUND(tile)
+
+            Set _max_rounds = max(_max_rounds, tile.rounds)
+
+        Return _max_rounds
+
+        
+    ADD_NEIGHBORS_TO_NEXT_ROUND(tile)
+        Let neighbors contain the valid SearchPositions adjacent to tile
+
+        For each neighbor_position in neighbors
+            If _board.TILE_AT(neighbor_position) is TileTypes.BLACK
+                _board.FLIP_TILE(neighbor_position)
+                Set neighbor_position.rounds = tile.rounds + 1
+                Add neighbor_position to end of _white_tiles 
+
+
+    MAX_ROUNDS()
+        Return _max_rounds
+
+
+    ANY_BLACK_REMAINING()
+        For each position in _black_tiles
+            If _board.TILE_AT(position) is TileTypes.BLACK
+                Return true
+
+        Return false
+
+
+
+Board is a class representing a game board with its tiles. Its internal _board
+property stores the current 2-D array representation of the board. The TYPE_AT
+method takes a SearchPosition and returns the TileType stored at the
+SearchPosition's coordinates. The FLIP_TILE method takes a SearchPosition and
+if the board contains a black tile at the SearchPosition's coordinates,
+replaces it with a white tile. The TO_SORTED_LINKED_LISTS method returns two
+doubly linked lists, white_tiles and black_tiles, which contain all of the 
+white and black tiles in the board, respectively.
+
+Class Board
+    _board = a 2-D array containing TileTypes to represent the game board.
+
+    Constructor(2d_array_board)
+        Store the 2-D input array in _board
+
+    TILE_AT(search_position)
+        Return the TileType in _board at (search_position.x, search_position.y)
+
+    FLIP_TILE(search_position)
+        If _board contains a black tile at search_position, change it to white
+
+    TO_SORTED_LINKED_LISTS()
+        Let White_Tiles and Black_Tiles be empty doubly linked lists of
+            SearchPositions
+
+        For each (x, y) position in _board
+            Let search_position be a new SearchPosition with (x=x, y=y, rounds=0)
+            If TILE_AT(search_position) is TileTypes.WHITE
+                Add search_position to the end of White_Tiles
+            Else if TILE_AT(search_position) is TileTypes.BLACK
+                Add search_position to the end of Black_Tiles
+
+        Return White_Tiles, Black_Tiles
+
+
+
+SearchPosition is a class representing a set of (x,y) coordinates on the board
+plus a round number. The round number represents the round at which this
+SearchPosition was found.
+
+Class SearchPosition
+    x = the X coordinate of this position
+    y = the Y coordinate of this position
+    round = the "round" of BFS at which this position was reached
+
+    Constructor(X, Y, Round)
+        Store X, Y, and Round in the respective fields in this SearchPosition
+
+
+
+TileTypes is an Enum representing the value contained in a tile on the board.
+Every cell in the 2-D board array must always contain exactly one TileType.
+
+Enum TileTypes
+    WHITE
+    BLACK
+    EMPTY
