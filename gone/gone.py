@@ -30,16 +30,17 @@ class Gone():
 
 
     def _simulate_game(self):
-        pass
-        # While _white_tiles is not empty
+        # While self._white_tiles is not empty
+        while self._white_tiles:
             # Let tile be the first element in _white_tiles
             # Remove tile from _white_tiles
+            tile = self._white_tiles.popleft()
 
-            # ADD_NEIGHBORS_TO_NEXT_ROUND(tile)
+            self._add_neighbors_to_next_round(tile)
 
-            # Set _max_rounds = max(_max_rounds, tile.rounds)
+            self._max_rounds = max(self._max_rounds, tile.rounds)
 
-        # Return _max_rounds
+        return self._max_rounds
 
         
     def _add_neighbors_to_next_round(self, tile):
