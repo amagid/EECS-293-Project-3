@@ -18,21 +18,34 @@ def test_init_stores_input_board():
 
     assert board._board is input_board
 
-TEST_MOVEMENTS = [
-    { "x": 1, "y": 0 },
-    { "x": -1, "y": 0 },
-    { "x": 0, "y": 1 },
-    { "x": 0, "y": -1 }
+TEST_INVALID_POSITIONS = [
+    SearchPosition(3, 0, 0),
+    SearchPosition(-1, 0, 0),
+    SearchPosition(0, 3, 0),
+    SearchPosition(0, -1, 0)
 ]
 @pytest.mark.parametrize(
-    'test_movement', TEST_MOVEMENTS
+    'test_position', TEST_INVALID_POSITIONS
 )
-def test_tile_at_returns_empty_when_invalid(test_movement):
+def test_position_is_valid_returns_false_when_invalid(test_position):
     input_board, board = _generate_basic_test_board()
 
-    test_position = SearchPosition(test_movement["x"] * len(input_board), test_movement["y"] * len(input_board[0]), 0)
+    assert not board._position_is_valid(test_position)
 
-    assert board.tile_at(test_position) == TileTypes.EMPTY
+TEST_VALID_POSITIONS = [
+    SearchPosition(0, 0, 0),
+    SearchPosition(0, 2, 0),
+    SearchPosition(2, 0, 0),
+    SearchPosition(2, 2, 0),
+    SearchPosition(1, 1, 0)
+]
+@pytest.mark.parametrize(
+    'test_position', TEST_VALID_POSITIONS
+)
+def test_position_is_valid_returns_true_when_invalid(test_position):
+    input_board, board = _generate_basic_test_board()
+
+    assert board._position_is_valid(test_position)
 
 TEST_TILE_AT_POSITIONS = [
     SearchPosition(0, 0, 0),
@@ -46,6 +59,14 @@ def test_tile_at_returns_tile_type(test_position):
     input_board, board = _generate_basic_test_board()
 
     assert board.tile_at(test_position) == input_board[test_position.x][test_position.y]
+
+@pytest.mark.parametrize(
+    'test_position', TEST_INVALID_POSITIONS
+)
+def test_tile_at_returns_empty_on_invalid_position(test_position):
+    input_board, board = _generate_basic_test_board()
+
+    assert board.tile_at(test_position) == TileTypes.EMPTY
 
 def test_flip_tile_flips_black_to_white():
     input_board, board = _generate_basic_test_board()
