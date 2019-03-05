@@ -18,8 +18,9 @@ class Board():
         self._board = board
 
     # Return the TileType in _board at (search_position.x, search_position.y)
+    # If search_position is invalid, return TileTypes.EMPTY
     def tile_at(self, search_position):
-        if 0 <= search_position.x < len(self._board) and 0 <= search_position.y < len(self._board[0]):
+        if search_position.x in range(0, len(self._board)) and search_position.y in range(0, len(self._board[0])):
             return self._board[search_position.x][search_position.y]
         else:
             return TileTypes.EMPTY
