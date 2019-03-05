@@ -2,11 +2,20 @@
 # return the required number of rounds and whether or not any black pieces remain
 # at the end.
 
-# Class Gone
-    # _board = an instance of the Board class generated from the input array
-    # _white_tiles = a doubly linked list of SearchPositions (all white tiles)
-    # _black_tiles = a doubly linked list of SearchPositions (all black tiles)
+from collections import deque
+from gone.board import Board
+from gone.search_position import SearchPosition
+from gone.tile_types import TileTypes
+
+class Gone():
+    # an instance of the Board class generated from the input array
+    _board = None
+    # _white_tiles = a deque of SearchPositions (all white tiles)
+    _white_tiles = None
+    # _black_tiles = a deque of SearchPositions (all black tiles)
+    _black_tiles = None
     # _max_rounds = the maximum number of rounds required to reach a black tile
+    _max_rounds = 0
 
 
     # PROCESS_GAME(2d_array_board)
