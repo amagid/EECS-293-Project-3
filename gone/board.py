@@ -44,7 +44,7 @@ class Board():
 
         # For each (x, y) position in _board, add to respective list
         for x in range(0, len(self._board)):
-            for y in range(0, len(self.board[x])):
+            for y in range(0, len(self._board[x])):
 
                 search_position = SearchPosition(x, y, 0)
 
