@@ -5,12 +5,19 @@ from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
 
 def _generate_basic_test_board():
-    board = [
-        [TileTypes.WHITE, TileTypes.WHITE, TileTypes.WHITE],
-        [TileTypes.BLACK, TileTypes.BLACK, TileTypes.BLACK],
-        [TileTypes.EMPTY, TileTypes.EMPTY, TileTypes.EMPTY]
-    ]
+    board = _numbers_to_tile_types([
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 3, 3]
+    ])
     return board, Board(board)
+
+def _numbers_to_tile_types(board):
+    for x in range(0, len(board)):
+        for y in range(0, len(board[0])):
+            board[x][y] = TileTypes(board[x][y])
+
+    return board
 
 def test_init_stores_input_board():
     input_board, _ = _generate_basic_test_board()
