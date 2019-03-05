@@ -34,16 +34,15 @@ def test_tile_at_returns_empty_when_invalid(test_movement):
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
 
-TEST_POSITIONS = [
+TEST_TILE_AT_POSITIONS = [
     SearchPosition(0, 0, 0),
     SearchPosition(1, 0, 0),
     SearchPosition(2, 0, 0)
 ]
 @pytest.mark.parametrize(
-    'test_position', TEST_POSITIONS
+    'test_position', TEST_TILE_AT_POSITIONS
 )
 def test_tile_at_returns_tile_type(test_position):
     input_board, board = _generate_basic_test_board()
 
     assert board.tile_at(test_position) == input_board[test_position.x][test_position.y]
-
