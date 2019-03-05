@@ -8,26 +8,29 @@ from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
 
 class Gone():
-    # an instance of the Board class generated from the input array
-    _board = None
-    # _white_tiles = a deque of SearchPositions (all white tiles)
-    _white_tiles = None
-    # _black_tiles = a deque of SearchPositions (all black tiles)
-    _black_tiles = None
-    # _max_rounds = the maximum number of rounds required to reach a black tile
-    _max_rounds = 0
+
+    def __init__(self, array_board):
+        # an instance of the Board class generated from the input array
+        self._board = Board(array_board)
+        # a deque of SearchPositions (all white tiles)
+        self._white_tiles = None
+        # a deque of SearchPositions (all black tiles)
+        self._black_tiles = None
+        # the maximum number of rounds required to reach a black tile
+        self._max_rounds = 0
+
+        self._initialize_game()
+
+    def _initialize_game(self):
+        self._white_tiles, self._black_tiles = self._board.to_sorted_linked_lists()
+
+        self._simulate_game()
+
+        return self._max_rounds(), self._any_black_remaining()
 
 
-    # PROCESS_GAME(2d_array_board)
-        # Generate a new Board instance from 2d_array_board and store in _board
-        # _white_tiles, _black_tiles = _board.TO_SORTED_LINKED_LISTS()
-
-        # SIMULATE_GAME()
-
-        # Return MAX_ROUNDS(), ANY_BLACK_REMAINING()
-
-
-    # SIMULATE_GAME()
+    def _simulate_game(self):
+        pass
         # While _white_tiles is not empty
             # Let tile be the first element in _white_tiles
             # Remove tile from _white_tiles
@@ -39,7 +42,8 @@ class Gone():
         # Return _max_rounds
 
         
-    # ADD_NEIGHBORS_TO_NEXT_ROUND(tile)
+    def _add_neighbors_to_next_round(self, tile):
+        pass
         # Let neighbors contain the valid SearchPositions adjacent to tile
 
         # For each neighbor_position in neighbors
@@ -49,11 +53,13 @@ class Gone():
                 # Add neighbor_position to end of _white_tiles 
 
 
-    # MAX_ROUNDS()
+    def _max_rounds(self):
+        pass
         # Return _max_rounds
 
 
-    # ANY_BLACK_REMAINING()
+    def _any_black_remaining(self):
+        pass
         # For each position in _black_tiles
             # If _board.TILE_AT(position) is TileTypes.BLACK
                 # Return true
