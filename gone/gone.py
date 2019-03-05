@@ -60,7 +60,7 @@ class Gone():
 
     def any_black_remaining(self):
         for position in self._black_tiles:
-            if self._board.tile_at(position) == TileTypes.BLACK
+            if self._board.tile_at(position) == TileTypes.BLACK:
                 return True
 
         # If none found, return False
