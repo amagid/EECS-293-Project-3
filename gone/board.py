@@ -19,7 +19,10 @@ class Board():
 
     # Return the TileType in _board at (search_position.x, search_position.y)
     def tile_at(self, search_position):
-        return self._board[search_position.x][search_position.y]
+        if 0 <= search_position.x < len(self._board) and 0 <= search_position.y < len(self._board[0]):
+            return self._board[search_position.x][search_position.y]
+        else:
+            return TileTypes.EMPTY
 
     # If _board contains a black tile at search_position, change it to white
     def flip_tile(self, search_position):
