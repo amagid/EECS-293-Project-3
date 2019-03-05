@@ -44,14 +44,22 @@ class Gone():
 
         
     def _add_neighbors_to_next_round(self, tile):
-        pass
         # Let neighbors contain the valid SearchPositions adjacent to tile
+        neighbors = []
+        if tile.x > 0:
+            neighbors.append(SearchPosition(tile.x - 1, tile.y, tile.round + 1))
+        if tile.x < len(self._board) - 1:
+            neighbors.append(SearchPosition(tile.x + 1, tile.y, tile.round + 1))
+        if tile.y > 0:
+            neighbors.append(SearchPosition(tile.x, tile.y - 1, tile.round + 1))
+        if tile.y < len(self._board[0]) - 1:
+            neighbors.append(SearchPosition(tile.x, tile.y + 1, tile.round + 1))
 
-        # For each neighbor_position in neighbors
-            # If _board.TILE_AT(neighbor_position) is TileTypes.BLACK
-                # _board.FLIP_TILE(neighbor_position)
-                # Set neighbor_position.rounds = tile.rounds + 1
+        for neighbor_position in neighbors:
+            if self._board.tile_at(neighbor_position) == TileTypes.BLACK:
+                self._board.flip_tile(neighbor_position)
                 # Add neighbor_position to end of _white_tiles 
+                self._white_tiles.append(neighbor_position)
 
 
     def _max_rounds(self):
