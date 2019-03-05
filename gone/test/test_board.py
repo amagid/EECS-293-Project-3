@@ -5,9 +5,9 @@ from gone.tile_types import TileTypes
 
 def _generate_basic_test_board():
     board = [
-        [1,1,1],
-        [2,2,2],
-        [3,3,3]
+        [TileTypes.WHITE, TileTypes.WHITE, TileTypes.WHITE],
+        [TileTypes.BLACK, TileTypes.BLACK, TileTypes.BLACK],
+        [TileTypes.EMPTY, TileTypes.EMPTY, TileTypes.EMPTY]
     ]
     return board, Board(board)
 
@@ -46,3 +46,33 @@ def test_tile_at_returns_tile_type(test_position):
     input_board, board = _generate_basic_test_board()
 
     assert board.tile_at(test_position) == input_board[test_position.x][test_position.y]
+
+def test_flip_tile_flips_black_to_white():
+    input_board, board = _generate_basic_test_board()
+    test_position = SearchPosition(1, 0, 0)
+
+    assert board.tile_at(test_position) == TileTypes.BLACK
+
+    board.flip_tile(test_position)
+
+    assert board.tile_at(test_position) == TileTypes.WHITE
+
+def test_flip_tile_ignores_white_tiles():
+    input_board, board = _generate_basic_test_board()
+    test_position = SearchPosition(0, 0, 0)
+
+    assert board.tile_at(test_position) == TileTypes.WHITE
+
+    board.flip_tile(test_position)
+
+    assert board.tile_at(test_position) == TileTypes.WHITE
+
+def test_flip_tile_ignores_empty_tiles():
+    input_board, board = _generate_basic_test_board()
+    test_position = SearchPosition(2, 0, 0)
+
+    assert board.tile_at(test_position) == TileTypes.EMPTY
+
+    board.flip_tile(test_position)
+
+    assert board.tile_at(test_position) == TileTypes.EMPTY
