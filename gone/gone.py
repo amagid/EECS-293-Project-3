@@ -38,7 +38,7 @@ class Gone():
 
             self._add_neighbors_to_next_round(tile)
 
-            self._max_rounds = max(self._max_rounds, tile.rounds)
+            self._max_rounds = max(self._max_rounds, tile.round)
 
         return self._max_rounds
 
