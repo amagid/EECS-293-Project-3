@@ -9,6 +9,7 @@
 
 from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
+from collections import deque
 
 class Board():
 
@@ -25,15 +26,24 @@ class Board():
         if self._board[search_position.x][search_position.y] == TileTypes.BLACK:
             self._board[search_position.x][search_position.y] = TileTypes.WHITE
 
-    TO_SORTED_LINKED_LISTS()
-        Let White_Tiles and Black_Tiles be empty doubly linked lists of
-            SearchPositions
+    def to_sorted_linked_lists(self):
+        # Let White_Tiles and Black_Tiles be empty doubly linked lists of
+        # SearchPositions
 
-        For each (x, y) position in _board
-            Let search_position be a new SearchPosition with (x=x, y=y, rounds=0)
-            If TILE_AT(search_position) is TileTypes.WHITE
-                Add search_position to the end of White_Tiles
-            Else if TILE_AT(search_position) is TileTypes.BLACK
-                Add search_position to the end of Black_Tiles
+        # TODO: Replace with dictionary to replace below if-elif with lookup
+        white_tiles = deque()
+        black_tiles = deque()
 
-        Return White_Tiles, Black_Tiles
+        # For each (x, y) position in _board, add to respective list
+        for x in range(0, len(self._board)):
+            for y in range(0, len(self.board[x])):
+
+                search_position = SearchPosition(x, y, 0)
+
+                if self.tile_at(search_position) == TileTypes.WHITE:
+                    white_tiles.append(search_position)
+
+                elif self.tile_at(search_position) == TileTypes.BLACK:
+                    black_tiles.append(search_position)
+
+        return white_tiles, black_tiles
