@@ -9,6 +9,8 @@ from gone.tile_types import TileTypes
 
 class Gone():
 
+    # TODO: Maybe reimplement this as static to allow for better unit testing
+
     def __init__(self, array_board):
         # an instance of the Board class generated from the input array
         self._board = Board(array_board)
