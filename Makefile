@@ -7,6 +7,11 @@ test:
 		source venv/bin/activate; \
 		coverage run --branch --source=${PROJECT} --omit="*test*" -m pytest ${PROJECT}/test/; \
 		coverage report; \
+		echo ; echo ; \
+		echo "===== Methods >= 3 Complexity Below =====" ; \
+		echo ; \
+		find . -name "*.py" | xargs -L1 python3 -m mccabe --min=4; \
+		echo ; echo ; \
 	)
 
 build:
