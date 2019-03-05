@@ -116,3 +116,25 @@ def test_to_sorted_linked_lists_returns_deque():
 
     assert type(white_tiles) is deque
     assert type(black_tiles) is deque
+
+def test_to_sorted_linked_lists_on_empty_board():
+    board = Board([[]])
+
+    white_tiles, black_tiles = board.to_sorted_linked_lists()
+
+    assert not white_tiles
+    assert not black_tiles
+
+def test_to_sorted_linked_lists_on_basic_board():
+    input_board, board = _generate_basic_test_board()
+
+    white_tiles, black_tiles = board.to_sorted_linked_lists()
+
+    assert len(white_tiles) == 3
+    assert len(black_tiles) == 3
+    
+    for tile in white_tiles:
+        assert board.tile_at(tile) == TileTypes.WHITE
+
+    for tile in black_tiles:
+        assert board.tile_at(tile) == TileTypes.BLACK
