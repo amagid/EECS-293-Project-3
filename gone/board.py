@@ -35,12 +35,13 @@ class Board():
 
 
     def to_sorted_linked_lists(self):
-        # Let White_Tiles and Black_Tiles be empty doubly linked lists of
-        # SearchPositions
+        # Sort all tiles into deques by their TileTypes
 
-        # TODO: Replace with dictionary to replace below if-elif with lookup
-        white_tiles = deque()
-        black_tiles = deque()
+        tile_lists = {
+            TileTypes.WHITE: deque(),
+            TileTypes.BLACK: deque(),
+            TileTypes.EMPTY: deque()
+        }
 
         # For each (x, y) position in _board, add to respective list
         for x in range(0, len(self._board)):
@@ -48,10 +49,6 @@ class Board():
 
                 search_position = SearchPosition(x, y, 0)
 
-                if self.tile_at(search_position) == TileTypes.WHITE:
-                    white_tiles.append(search_position)
+                tile_lists[self.tile_at(search_position)].append(search_position)
 
-                elif self.tile_at(search_position) == TileTypes.BLACK:
-                    black_tiles.append(search_position)
-
-        return white_tiles, black_tiles
+        return tile_lists[TileTypes.WHITE], tile_lists[TileTypes.BLACK]
