@@ -26,7 +26,7 @@ class Gone():
 
         self._simulate_game()
 
-        return self._max_rounds(), self._any_black_remaining()
+        return self.max_rounds(), self.any_black_remaining()
 
 
     def _simulate_game(self):
@@ -54,12 +54,11 @@ class Gone():
                 self._white_tiles.append(neighbor_position)
 
 
-    def _max_rounds(self):
-        pass
-        # Return _max_rounds
+    def max_rounds(self):
+        return self._max_rounds
 
 
-    def _any_black_remaining(self):
+    def any_black_remaining(self):
         pass
         # For each position in _black_tiles
             # If _board.TILE_AT(position) is TileTypes.BLACK
