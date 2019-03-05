@@ -45,15 +45,7 @@ class Gone():
         
     def _add_neighbors_to_next_round(self, tile):
         # Let neighbors contain the valid SearchPositions adjacent to tile
-        neighbors = []
-        if tile.x > 0:
-            neighbors.append(SearchPosition(tile.x - 1, tile.y, tile.round + 1))
-        if tile.x < len(self._board) - 1:
-            neighbors.append(SearchPosition(tile.x + 1, tile.y, tile.round + 1))
-        if tile.y > 0:
-            neighbors.append(SearchPosition(tile.x, tile.y - 1, tile.round + 1))
-        if tile.y < len(self._board[0]) - 1:
-            neighbors.append(SearchPosition(tile.x, tile.y + 1, tile.round + 1))
+        neighbors = tile.neighbors()
 
         for neighbor_position in neighbors:
             if self._board.tile_at(neighbor_position) == TileTypes.BLACK:
