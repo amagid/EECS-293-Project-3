@@ -20,15 +20,19 @@ class Board():
     # Return the TileType in _board at (search_position.x, search_position.y)
     # If search_position is invalid, return TileTypes.EMPTY
     def tile_at(self, search_position):
-        if search_position.x in range(0, len(self._board)) and search_position.y in range(0, len(self._board[0])):
+        if self._position_is_valid(search_position):
             return self._board[search_position.x][search_position.y]
         else:
             return TileTypes.EMPTY
 
     # If _board contains a black tile at search_position, change it to white
     def flip_tile(self, search_position):
-        if self._board[search_position.x][search_position.y] == TileTypes.BLACK:
+        if self.tile_at(search_position) == TileTypes.BLACK:
             self._board[search_position.x][search_position.y] = TileTypes.WHITE
+
+    def _position_is_valid(self, search_position):
+        return search_position.x in range(0, len(self._board)) and search_position.y in range(0, len(self._board[0]))
+
 
     def to_sorted_linked_lists(self):
         # Let White_Tiles and Black_Tiles be empty doubly linked lists of
