@@ -1,4 +1,5 @@
 import pytest
+from collections import deque
 from gone.board import Board
 from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
@@ -107,3 +108,11 @@ def test_flip_tile_ignores_invalid_tiles():
     board.flip_tile(test_position)
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
+
+def test_to_sorted_linked_lists_returns_deque():
+    board = Board([[]])
+
+    white_tiles, black_tiles = board.to_sorted_linked_lists()
+
+    assert type(white_tiles) is deque
+    assert type(black_tiles) is deque
