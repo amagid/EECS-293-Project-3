@@ -76,3 +76,13 @@ def test_flip_tile_ignores_empty_tiles():
     board.flip_tile(test_position)
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
+
+def test_flip_tile_ignores_invalid_tiles():
+    input_board, board = _generate_basic_test_board()
+    test_position = SearchPosition(-1, -1, 0)
+
+    assert board.tile_at(test_position) == TileTypes.EMPTY
+
+    board.flip_tile(test_position)
+
+    assert board.tile_at(test_position) == TileTypes.EMPTY
