@@ -10,7 +10,11 @@ test:
 		echo ; echo ; \
 		echo "===== Methods >= 3 Complexity Below =====" ; \
 		echo ; \
-		find . -name "*.py" | xargs -L1 python3 -m mccabe --min=4; \
+		find ./gone/*.py | xargs -L1 python3 -m mccabe --min=4; \
+		echo ; echo ; \
+		echo "===== Tests > 4 Complexity Below =====" ; \
+		echo ; \
+		find ./gone/test/*.py | xargs -L1 python3 -m mccabe --min=6; \
 		echo ; echo ; \
 	)
 
