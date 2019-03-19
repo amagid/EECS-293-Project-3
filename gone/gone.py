@@ -56,7 +56,6 @@ class Gone():
     def max_rounds(self):
         return self._max_rounds
 
-    # TODO: Use filter, map, or reduce
     def any_black_remaining(self):
         for position in self._black_tiles:
             if self._board.tile_at(position) == TileTypes.BLACK:
