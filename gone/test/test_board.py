@@ -5,6 +5,7 @@ from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
 from utils import _generate_basic_test_board, _numbers_to_tile_types
 
+# Structured Basis
 def test_init_stores_input_board():
     input_board, _ = _generate_basic_test_board()
 
@@ -12,6 +13,7 @@ def test_init_stores_input_board():
 
     assert board._board is input_board
 
+# Structured Basis
 TEST_INVALID_POSITIONS = [
     SearchPosition(3, 0, 0),
     SearchPosition(-1, 0, 0),
@@ -41,6 +43,7 @@ def test_position_is_valid_returns_true_when_invalid(test_position):
 
     assert board._position_is_valid(test_position)
 
+# Structured Basis
 TEST_TILE_AT_POSITIONS = [
     SearchPosition(0, 0, 0),
     SearchPosition(1, 0, 0),
@@ -54,6 +57,7 @@ def test_tile_at_returns_tile_type(test_position):
 
     assert board.tile_at(test_position) == input_board[test_position.x][test_position.y]
 
+# Structured Basis
 @pytest.mark.parametrize(
     'test_position', TEST_INVALID_POSITIONS
 )
@@ -62,6 +66,7 @@ def test_tile_at_returns_empty_on_invalid_position(test_position):
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
 
+# Structured Basis
 def test_flip_tile_flips_black_to_white():
     input_board, board = _generate_basic_test_board()
     test_position = SearchPosition(1, 0, 0)
@@ -82,6 +87,7 @@ def test_flip_tile_ignores_white_tiles():
 
     assert board.tile_at(test_position) == TileTypes.WHITE
 
+# Structured Basis
 def test_flip_tile_errors_on_empty_tiles():
     input_board, board = _generate_basic_test_board()
     test_position = SearchPosition(2, 0, 0)
@@ -100,6 +106,7 @@ def test_flip_tile_errors_on_invalid_tiles():
     with pytest.raises(AssertionError):
         board.flip_tile(test_position)
 
+# Structured Basis
 def test_tile_position_lists_returns_deque():
     board = Board([[]])
 
@@ -108,6 +115,7 @@ def test_tile_position_lists_returns_deque():
     assert type(white_tiles) is deque
     assert type(black_tiles) is deque
 
+# Structured Basis
 def test_tile_position_lists_on_empty_board():
     board = Board([[]])
 
@@ -116,6 +124,7 @@ def test_tile_position_lists_on_empty_board():
     assert not white_tiles
     assert not black_tiles
 
+# Structured Basis
 def test_tile_position_lists_on_basic_board():
     input_board, board = _generate_basic_test_board()
 
