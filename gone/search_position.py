@@ -13,9 +13,12 @@ class SearchPosition():
     def neighbors(self):
         neighbors = []
 
-        neighbors.append(SearchPosition(self.x - 1, self.y, self.round + 1))
-        neighbors.append(SearchPosition(self.x + 1, self.y, self.round + 1))
-        neighbors.append(SearchPosition(self.x, self.y - 1, self.round + 1))
-        neighbors.append(SearchPosition(self.x, self.y + 1, self.round + 1))
+        neighbors.append(SearchPosition(self.x - 1, self.y, self.round))
+        neighbors.append(SearchPosition(self.x + 1, self.y, self.round))
+        neighbors.append(SearchPosition(self.x, self.y - 1, self.round))
+        neighbors.append(SearchPosition(self.x, self.y + 1, self.round))
         
         return neighbors
+
+    def increment_round(self):
+        self.round += 1

@@ -38,10 +38,10 @@ def test_neighbors_returns_all_neighbors():
 def test_neighbors_returns_invalid_neighbors_too():
     search_position = SearchPosition(-2, -2, 0)
     expected_positions = [
-        SearchPosition(-3, -2, 1),
-        SearchPosition(-1, -2, 1),
-        SearchPosition(-2, -3, 1),
-        SearchPosition(-2, -1, 1)
+        SearchPosition(-3, -2, 0),
+        SearchPosition(-1, -2, 0),
+        SearchPosition(-2, -3, 0),
+        SearchPosition(-2, -1, 0)
     ]
 
     neighbors = search_position.neighbors()
@@ -55,14 +55,6 @@ def test_neighbors_returns_invalid_neighbors_too():
                 found = True
 
         assert found
-
-def test_neighbors_increments_round():
-    search_position = SearchPosition(1, 1, 0)
-
-    neighbors = search_position.neighbors()
-
-    for neighbor in neighbors:
-        assert neighbor.round == search_position.round + 1
 
 
 

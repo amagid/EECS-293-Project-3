@@ -49,6 +49,7 @@ class Gone():
 
         for neighbor_position in neighbors:
             if self._board.tile_at(neighbor_position) == TileTypes.BLACK:
+                neighbor_position.increment_round()
                 self._board.flip_tile(neighbor_position)
                 # Add neighbor_position to end of _white_tiles 
                 self._white_tiles.append(neighbor_position)
