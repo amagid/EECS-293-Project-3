@@ -42,6 +42,7 @@ class Gone():
 
             self._max_rounds = max(self._max_rounds, tile.round)
 
+        # TODO: Remove
         return self._max_rounds
 
         
@@ -59,7 +60,7 @@ class Gone():
     def max_rounds(self):
         return self._max_rounds
 
-
+    # TODO: Use filter, map, or reduce
     def any_black_remaining(self):
         for position in self._black_tiles:
             if self._board.tile_at(position) == TileTypes.BLACK:

@@ -25,6 +25,7 @@ class Board():
         else:
             return TileTypes.EMPTY
 
+    # TODO: Assert that the tile isn't empty instead of the IF
     # If _board contains a black tile at search_position, change it to white
     def flip_tile(self, search_position):
         if self.tile_at(search_position) == TileTypes.BLACK:
@@ -34,9 +35,10 @@ class Board():
         return search_position.x in range(0, len(self._board)) and search_position.y in range(0, len(self._board[0]))
 
 
+    # TODO: Rename to something like "tile_lists"
     def to_sorted_linked_lists(self):
         # Sort all tiles into deques by their TileTypes
-
+        # TODO: Look into a default dict here
         tile_lists = {
             TileTypes.WHITE: deque(),
             TileTypes.BLACK: deque(),
