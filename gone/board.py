@@ -9,7 +9,7 @@
 
 from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
-from collections import deque
+from collections import deque, defaultdict
 
 class Board():
 
@@ -37,12 +37,7 @@ class Board():
 
     def tile_position_lists(self):
         # Sort all tiles into deques by their TileTypes
-        # TODO: Look into a default dict here
-        tile_position_lists = {
-            TileTypes.WHITE: deque(),
-            TileTypes.BLACK: deque(),
-            TileTypes.EMPTY: deque()
-        }
+        tile_position_lists = defaultdict(deque)
 
         # For each (x, y) position in _board, add to respective list
         for x in range(0, len(self._board)):
