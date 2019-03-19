@@ -56,8 +56,16 @@ def test_neighbors_returns_invalid_neighbors_too():
 
         assert found
 
+def test_increment_round_on_0():
+    search_position = SearchPosition(0, 0, 0)
+    
+    search_position.increment_round()
 
+    assert search_position.round == 1
 
+def test_increment_round_on_mid_number():
+    search_position = SearchPosition(0, 0, 5)
+    
+    search_position.increment_round()
 
-
-
+    assert search_position.round == 6
