@@ -20,13 +20,10 @@ class Gone():
         self._max_rounds = 0
 
         self._initialize_game()
+        self._simulate_game()
 
     def _initialize_game(self):
         self._white_tiles, self._black_tiles = self._board.tile_position_lists()
-
-        self._simulate_game()
-
-        return self.max_rounds(), self.any_black_remaining()
 
 
     def _simulate_game(self):

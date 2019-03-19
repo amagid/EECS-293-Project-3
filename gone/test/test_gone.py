@@ -3,6 +3,7 @@ from gone.gone import Gone
 from gone.board import Board
 from utils import _generate_basic_test_board, _numbers_to_tile_types
 
+# Structured Basis
 def test_gone_empty_board():
     input_board = [[]]
 
