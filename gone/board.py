@@ -25,11 +25,12 @@ class Board():
         else:
             return TileTypes.EMPTY
 
-    # TODO: Assert that the tile isn't empty instead of the IF
     # If _board contains a black tile at search_position, change it to white
     def flip_tile(self, search_position):
-        if self.tile_at(search_position) == TileTypes.BLACK:
-            self._board[search_position.x][search_position.y] = TileTypes.WHITE
+        # Tile should never be EMPTY, always BLACK or WHITE
+        assert self.tile_at(search_position) != TileTypes.EMPTY
+
+        self._board[search_position.x][search_position.y] = TileTypes.WHITE
 
     def _position_is_valid(self, search_position):
         return search_position.x in range(0, len(self._board)) and search_position.y in range(0, len(self._board[0]))

@@ -82,25 +82,23 @@ def test_flip_tile_ignores_white_tiles():
 
     assert board.tile_at(test_position) == TileTypes.WHITE
 
-def test_flip_tile_ignores_empty_tiles():
+def test_flip_tile_errors_on_empty_tiles():
     input_board, board = _generate_basic_test_board()
     test_position = SearchPosition(2, 0, 0)
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
 
-    board.flip_tile(test_position)
+    with pytest.raises(AssertionError):
+        board.flip_tile(test_position)
 
-    assert board.tile_at(test_position) == TileTypes.EMPTY
-
-def test_flip_tile_ignores_invalid_tiles():
+def test_flip_tile_errors_on_invalid_tiles():
     input_board, board = _generate_basic_test_board()
     test_position = SearchPosition(-1, -1, 0)
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
 
-    board.flip_tile(test_position)
-
-    assert board.tile_at(test_position) == TileTypes.EMPTY
+    with pytest.raises(AssertionError):
+        board.flip_tile(test_position)
 
 def test_tile_position_lists_returns_deque():
     board = Board([[]])
