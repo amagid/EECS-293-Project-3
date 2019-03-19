@@ -42,9 +42,6 @@ class Gone():
 
             self._max_rounds = max(self._max_rounds, tile.round)
 
-        # TODO: Remove
-        return self._max_rounds
-
         
     def _add_neighbors_to_next_round(self, tile):
         # Let neighbors contain the valid SearchPositions adjacent to tile
