@@ -81,3 +81,15 @@ def test_gone_various_boards(test_case):
 
     assert results.max_rounds() == expected_rounds
     assert results.any_black_remaining() == expected_black_left
+
+def test_initialize_game():
+    input_board = _numbers_to_tile_types([
+        [1, 1, 1],
+        [3, 3, 3],
+        [2, 2, 2]
+    ])
+
+    results = Gone(input_board)
+
+    assert results.max_rounds() == 0
+    assert results.any_black_remaining()

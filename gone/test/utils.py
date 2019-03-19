@@ -1,5 +1,6 @@
 from gone.tile_types import TileTypes
 from gone.board import Board
+from gone.gone import Gone
 
 def _generate_basic_test_board():
     board = _numbers_to_tile_types([
@@ -15,3 +16,13 @@ def _numbers_to_tile_types(board):
             board[x][y] = TileTypes(board[x][y])
 
     return board
+
+def _generate_unprocessed_gone():
+    gone = Gone([[]])
+
+    gone._board = None
+    gone._white_tiles = None
+    gone._black_tiles = None
+    gone._max_rounds = 0
+
+    return gone
