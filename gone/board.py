@@ -3,9 +3,9 @@
 # method takes a SearchPosition and returns the TileType stored at the
 # SearchPosition's coordinates. The FLIP_TILE method takes a SearchPosition and
 # if the board contains a black tile at the SearchPosition's coordinates,
-# replaces it with a white tile. The TO_SORTED_LINKED_LISTS method returns two
-# doubly linked lists, white_tiles and black_tiles, which contain all of the 
-# white and black tiles in the board, respectively.
+# replaces it with a white tile. The TILE_POSITION_LISTS method returns two
+# doubly linked lists, white_tiles and black_tiles, which contain the positions
+# of all of the white and black tiles in the board, respectively.
 
 from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
@@ -34,12 +34,10 @@ class Board():
     def _position_is_valid(self, search_position):
         return search_position.x in range(0, len(self._board)) and search_position.y in range(0, len(self._board[0]))
 
-
-    # TODO: Rename to something like "tile_lists"
-    def to_sorted_linked_lists(self):
+    def tile_position_lists(self):
         # Sort all tiles into deques by their TileTypes
         # TODO: Look into a default dict here
-        tile_lists = {
+        tile_position_lists = {
             TileTypes.WHITE: deque(),
             TileTypes.BLACK: deque(),
             TileTypes.EMPTY: deque()
@@ -51,6 +49,6 @@ class Board():
 
                 search_position = SearchPosition(x, y, 0)
 
-                tile_lists[self.tile_at(search_position)].append(search_position)
+                tile_position_lists[self.tile_at(search_position)].append(search_position)
 
-        return tile_lists[TileTypes.WHITE], tile_lists[TileTypes.BLACK]
+        return tile_position_lists[TileTypes.WHITE], tile_position_lists[TileTypes.BLACK]

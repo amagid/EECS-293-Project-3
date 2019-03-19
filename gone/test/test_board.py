@@ -102,26 +102,26 @@ def test_flip_tile_ignores_invalid_tiles():
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
 
-def test_to_sorted_linked_lists_returns_deque():
+def test_tile_position_lists_returns_deque():
     board = Board([[]])
 
-    white_tiles, black_tiles = board.to_sorted_linked_lists()
+    white_tiles, black_tiles = board.tile_position_lists()
 
     assert type(white_tiles) is deque
     assert type(black_tiles) is deque
 
-def test_to_sorted_linked_lists_on_empty_board():
+def test_tile_position_lists_on_empty_board():
     board = Board([[]])
 
-    white_tiles, black_tiles = board.to_sorted_linked_lists()
+    white_tiles, black_tiles = board.tile_position_lists()
 
     assert not white_tiles
     assert not black_tiles
 
-def test_to_sorted_linked_lists_on_basic_board():
+def test_tile_position_lists_on_basic_board():
     input_board, board = _generate_basic_test_board()
 
-    white_tiles, black_tiles = board.to_sorted_linked_lists()
+    white_tiles, black_tiles = board.tile_position_lists()
 
     assert len(white_tiles) == 3
     assert len(black_tiles) == 3

@@ -24,7 +24,7 @@ class Gone():
         self._initialize_game()
 
     def _initialize_game(self):
-        self._white_tiles, self._black_tiles = self._board.to_sorted_linked_lists()
+        self._white_tiles, self._black_tiles = self._board.tile_position_lists()
 
         self._simulate_game()
 

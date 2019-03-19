@@ -24,7 +24,7 @@ Class Gone
 
     PROCESS_GAME(2d_array_board)
         Generate a new Board instance from 2d_array_board and store in _board
-        _white_tiles, _black_tiles = _board.TO_SORTED_LINKED_LISTS()
+        _white_tiles, _black_tiles = _board.TILE_POSITION_LISTS()
 
         SIMULATE_GAME()
 
@@ -71,7 +71,7 @@ property stores the current 2-D array representation of the board. The TYPE_AT
 method takes a SearchPosition and returns the TileType stored at the
 SearchPosition's coordinates. The FLIP_TILE method takes a SearchPosition and
 if the board contains a black tile at the SearchPosition's coordinates,
-replaces it with a white tile. The TO_SORTED_LINKED_LISTS method returns two
+replaces it with a white tile. The TILE_POSITION_LISTS method returns two
 doubly linked lists, white_tiles and black_tiles, which contain all of the 
 white and black tiles in the board, respectively.
 
@@ -87,7 +87,7 @@ Class Board
     FLIP_TILE(search_position)
         If _board contains a black tile at search_position, change it to white
 
-    TO_SORTED_LINKED_LISTS()
+    TILE_POSITION_LISTS()
         Let White_Tiles and Black_Tiles be empty doubly linked lists of
             SearchPositions
 
