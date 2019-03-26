@@ -4,7 +4,7 @@ from gone.search_position import SearchPosition
 def _are_same_position(position1, position2):
     return position1.x == position2.x and position1.y == position2.y
 
-# Structured Basis
+# Structured Basis, Data Flow
 def test_init_assigns_x_y_round():
     x = 10
     y = 20
@@ -15,7 +15,7 @@ def test_init_assigns_x_y_round():
     assert search_position.y == y
     assert search_position.round == round
 
-# Structured Basis
+# Structured Basis, Data Flow
 def test_neighbors_returns_all_neighbors():
     search_position = SearchPosition(1, 1, 0)
     expected_positions = [
@@ -65,7 +65,7 @@ def test_increment_round_on_0():
 
     assert search_position.round == 1
 
-# Structured Basis
+# Structured Basis, Data Flow
 def test_increment_round_on_mid_number():
     search_position = SearchPosition(0, 0, 5)
     
