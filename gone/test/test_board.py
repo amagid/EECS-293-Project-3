@@ -5,7 +5,7 @@ from gone.search_position import SearchPosition
 from gone.tile_types import TileTypes
 from utils import _generate_basic_test_board, _numbers_to_tile_types
 
-# Structured Basis
+# Structured Basis, Data Flow
 def test_init_stores_input_board():
     input_board, _ = _generate_basic_test_board()
 
@@ -13,7 +13,7 @@ def test_init_stores_input_board():
 
     assert board._board is input_board
 
-# Structured Basis
+# Structured Basis, Data Flow
 TEST_INVALID_POSITIONS = [
     SearchPosition(3, 0, 0),
     SearchPosition(-1, 0, 0),
@@ -38,12 +38,12 @@ TEST_VALID_POSITIONS = [
 @pytest.mark.parametrize(
     'test_position', TEST_VALID_POSITIONS
 )
-def test_position_is_valid_returns_true_when_invalid(test_position):
+def test_position_is_valid_returns_true_when_valid(test_position):
     input_board, board = _generate_basic_test_board()
 
     assert board._position_is_valid(test_position)
 
-# Structured Basis
+# Structured Basis, Data Flow
 TEST_TILE_AT_POSITIONS = [
     SearchPosition(0, 0, 0),
     SearchPosition(1, 0, 0),
@@ -66,7 +66,7 @@ def test_tile_at_returns_empty_on_invalid_position(test_position):
 
     assert board.tile_at(test_position) == TileTypes.EMPTY
 
-# Structured Basis
+# Structured Basis, Data Flow
 def test_flip_tile_flips_black_to_white():
     input_board, board = _generate_basic_test_board()
     test_position = SearchPosition(1, 0, 0)
@@ -115,9 +115,18 @@ def test_tile_position_lists_returns_deque():
     assert type(white_tiles) is deque
     assert type(black_tiles) is deque
 
-# Structured Basis
+# Structured Basis, Data Flow
 def test_tile_position_lists_on_empty_board():
     board = Board([[]])
+
+    white_tiles, black_tiles = board.tile_position_lists()
+
+    assert not white_tiles
+    assert not black_tiles
+
+# Structured Basis, Data Flow
+def test_tile_position_lists_on_thin_board():
+    board = Board([[], [], [], []])
 
     white_tiles, black_tiles = board.tile_position_lists()
 
