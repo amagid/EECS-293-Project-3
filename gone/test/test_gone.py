@@ -34,7 +34,7 @@ def test_gone_on_3d_board():
     with pytest.raises(TypeError):
         Gone(input_board)
 
-# Boundary, Compound Boundary
+# Boundary, Compound Boundary, Good Data
 def test_gone_1x1_board():
     input_board = [[TileTypes.WHITE]]
 
@@ -43,7 +43,7 @@ def test_gone_1x1_board():
     assert results.max_rounds() == 0
     assert not results.any_black_remaining()
 
-# Structured Basis, Data Flow, Boundary, Compound Boundary
+# Structured Basis, Data Flow, Boundary, Compound Boundary, Good Data
 def test_gone_basic_board():
     input_board, _ = _generate_basic_test_board()
 
@@ -52,7 +52,7 @@ def test_gone_basic_board():
     assert results.max_rounds() == 1
     assert not results.any_black_remaining()
 
-# Structured Basis, Boundary
+# Structured Basis, Boundary, Good Data
 def test_gone_some_black_remaining():
     input_board = _numbers_to_tile_types([
         [1, 1, 1],
@@ -65,7 +65,7 @@ def test_gone_some_black_remaining():
     assert results.max_rounds() == 0
     assert results.any_black_remaining()
 
-# Boundary, Compound Boundary
+# Structured Basis, Boundary, Compound Boundary, Good Data
 TEST_BOARDS = [
     (
         [
@@ -107,8 +107,6 @@ TEST_BOARDS = [
 @pytest.mark.parametrize(
     'test_case', TEST_BOARDS
 )
-
-# Structured Basis
 def test_gone_various_boards(test_case):
     input_board, expected_rounds, expected_black_left = test_case
     board = _numbers_to_tile_types(input_board)
