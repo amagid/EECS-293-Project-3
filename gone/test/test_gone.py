@@ -2,6 +2,7 @@ import pytest
 from gone.gone import Gone
 from gone.board import Board
 from utils import _generate_basic_test_board, _numbers_to_tile_types, _generate_unprocessed_gone
+from gone.tile_types import TileTypes
 
 # Structured Basis, Data Flow, Boundary, Compound Boundary
 def test_gone_empty_board():
