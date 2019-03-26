@@ -13,7 +13,7 @@ def test_init_stores_input_board():
 
     assert board._board is input_board
 
-# Structured Basis, Data Flow
+# Structured Basis, Data Flow, Boundary
 TEST_INVALID_POSITIONS = [
     SearchPosition(3, 0, 0),
     SearchPosition(-1, 0, 0),
@@ -28,6 +28,7 @@ def test_position_is_valid_returns_false_when_invalid(test_position):
 
     assert not board._position_is_valid(test_position)
 
+# Boundary
 TEST_VALID_POSITIONS = [
     SearchPosition(0, 0, 0),
     SearchPosition(0, 2, 0),
@@ -43,21 +44,16 @@ def test_position_is_valid_returns_true_when_valid(test_position):
 
     assert board._position_is_valid(test_position)
 
-# Structured Basis, Data Flow
-TEST_TILE_AT_POSITIONS = [
-    SearchPosition(0, 0, 0),
-    SearchPosition(1, 0, 0),
-    SearchPosition(2, 0, 0)
-]
+# Structured Basis, Data Flow, Boundary
 @pytest.mark.parametrize(
-    'test_position', TEST_TILE_AT_POSITIONS
+    'test_position', TEST_VALID_POSITIONS
 )
 def test_tile_at_returns_tile_type(test_position):
     input_board, board = _generate_basic_test_board()
 
     assert board.tile_at(test_position) == input_board[test_position.x][test_position.y]
 
-# Structured Basis
+# Structured Basis, Boundary
 @pytest.mark.parametrize(
     'test_position', TEST_INVALID_POSITIONS
 )
@@ -106,7 +102,7 @@ def test_flip_tile_errors_on_invalid_tiles():
     with pytest.raises(AssertionError):
         board.flip_tile(test_position)
 
-# Structured Basis
+# Structured Basis, Boundary
 def test_tile_position_lists_returns_deque():
     board = Board([[]])
 
@@ -115,9 +111,18 @@ def test_tile_position_lists_returns_deque():
     assert type(white_tiles) is deque
     assert type(black_tiles) is deque
 
-# Structured Basis, Data Flow
+# Structured Basis, Data Flow, Boundary
 def test_tile_position_lists_on_empty_board():
-    board = Board([[]])
+    board = Board([])
+
+    white_tiles, black_tiles = board.tile_position_lists()
+
+    assert not white_tiles
+    assert not black_tiles
+
+# Structured Basis, Data Flow, Boundary
+def test_tile_position_lists_on_1x1_board():
+    board = Board([[TileTypes.EMPTY]])
 
     white_tiles, black_tiles = board.tile_position_lists()
 
