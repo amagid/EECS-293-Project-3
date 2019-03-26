@@ -13,12 +13,14 @@ def test_init_stores_input_board():
 
     assert board._board is input_board
 
-# Structured Basis, Data Flow, Boundary
+# Structured Basis, Data Flow, Boundary, Compound Boundary
 TEST_INVALID_POSITIONS = [
     SearchPosition(3, 0, 0),
     SearchPosition(-1, 0, 0),
     SearchPosition(0, 3, 0),
-    SearchPosition(0, -1, 0)
+    SearchPosition(0, -1, 0),
+    SearchPosition(-1, -1, 0),
+    SearchPosition(3, 3, 0)
 ]
 @pytest.mark.parametrize(
     'test_position', TEST_INVALID_POSITIONS
@@ -28,7 +30,7 @@ def test_position_is_valid_returns_false_when_invalid(test_position):
 
     assert not board._position_is_valid(test_position)
 
-# Boundary
+# Boundary, Compound Boundary
 TEST_VALID_POSITIONS = [
     SearchPosition(0, 0, 0),
     SearchPosition(0, 2, 0),
@@ -102,7 +104,7 @@ def test_flip_tile_errors_on_invalid_tiles():
     with pytest.raises(AssertionError):
         board.flip_tile(test_position)
 
-# Structured Basis, Boundary
+# Structured Basis, Boundary, Compound Boundary
 def test_tile_position_lists_returns_deque():
     board = Board([[]])
 
@@ -120,7 +122,7 @@ def test_tile_position_lists_on_empty_board():
     assert not white_tiles
     assert not black_tiles
 
-# Structured Basis, Data Flow, Boundary
+# Structured Basis, Data Flow, Boundary, Compound Boundary
 def test_tile_position_lists_on_1x1_board():
     board = Board([[TileTypes.EMPTY]])
 
@@ -138,7 +140,7 @@ def test_tile_position_lists_on_thin_board():
     assert not white_tiles
     assert not black_tiles
 
-# Structured Basis
+# Structured Basis, Compound Boundary
 def test_tile_position_lists_on_basic_board():
     input_board, board = _generate_basic_test_board()
 
