@@ -4,7 +4,7 @@ from gone.board import Board
 from utils import _generate_basic_test_board, _numbers_to_tile_types, _generate_unprocessed_gone
 from gone.tile_types import TileTypes
 
-# Structured Basis, Data Flow, Boundary, Compound Boundary
+# Structured Basis, Data Flow, Boundary, Compound Boundary, Bad Data
 def test_gone_empty_board():
     input_board = [[]]
 
@@ -12,6 +12,27 @@ def test_gone_empty_board():
 
     assert results.max_rounds() == 0
     assert not results.any_black_remaining()
+
+# Bad Data
+def test_gone_on_none_board():
+    input_board = None
+
+    with pytest.raises(TypeError):
+        Gone(input_board)
+
+# Bad Data
+def test_gone_on_no_rows_board():
+    input_board = [None]
+
+    with pytest.raises(TypeError):
+        Gone(input_board)
+
+# Bad Data
+def test_gone_on_3d_board():
+    input_board = [[[]]]
+
+    with pytest.raises(TypeError):
+        Gone(input_board)
 
 # Boundary, Compound Boundary
 def test_gone_1x1_board():
