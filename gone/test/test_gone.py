@@ -1,4 +1,5 @@
 import pytest
+import math
 from gone.gone import Gone
 from gone.board import Board
 from utils import _generate_basic_test_board, _numbers_to_tile_types, _generate_unprocessed_gone
@@ -116,3 +117,40 @@ def test_gone_various_boards(test_case):
     assert results.max_rounds() == expected_rounds
     assert results.any_black_remaining() == expected_black_left
 
+HUGE_DIMENSION = 1000000
+# Stress
+def test_gone_long_thin_board():
+    input_board = [[TileTypes.BLACK] * HUGE_DIMENSION]
+    input_board[0][0] = TileTypes.WHITE
+
+    results = Gone(input_board)
+
+    assert results.max_rounds() == HUGE_DIMENSION - 1
+    assert not results.any_black_remaining()
+
+
+# Stress
+def test_gone_tall_thin_board():
+    input_board = []
+    for i in range(0, HUGE_DIMENSION):
+        input_board.append([TileTypes.BLACK])
+
+    input_board[0][0] = TileTypes.WHITE
+
+    results = Gone(input_board)
+
+    assert results.max_rounds() == HUGE_DIMENSION - 1
+    assert not results.any_black_remaining()
+
+# Stress
+def test_large_full_board():
+    input_board = []
+    for i in range(int(math.sqrt(HUGE_DIMENSION))):
+        input_board.append([TileTypes.BLACK] * int(math.sqrt(HUGE_DIMENSION)))
+
+    input_board[0][0] = TileTypes.WHITE
+
+    results = Gone(input_board)
+
+    assert results.max_rounds() == int(math.sqrt(HUGE_DIMENSION) - 1) * 2
+    assert not results.any_black_remaining()
