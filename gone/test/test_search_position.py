@@ -58,6 +58,7 @@ def test_neighbors_returns_invalid_neighbors_too():
 
         assert found
 
+# Boundary
 def test_increment_round_on_0():
     search_position = SearchPosition(0, 0, 0)
     
@@ -65,7 +66,7 @@ def test_increment_round_on_0():
 
     assert search_position.round == 1
 
-# Structured Basis, Data Flow
+# Structured Basis, Data Flow, Boundary
 def test_increment_round_on_mid_number():
     search_position = SearchPosition(0, 0, 5)
     
