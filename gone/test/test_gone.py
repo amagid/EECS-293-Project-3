@@ -3,7 +3,7 @@ from gone.gone import Gone
 from gone.board import Board
 from utils import _generate_basic_test_board, _numbers_to_tile_types, _generate_unprocessed_gone
 
-# Structured Basis, Data Flow, Boundary
+# Structured Basis, Data Flow, Boundary, Compound Boundary
 def test_gone_empty_board():
     input_board = [[]]
 
@@ -12,7 +12,7 @@ def test_gone_empty_board():
     assert results.max_rounds() == 0
     assert not results.any_black_remaining()
 
-# Boundary
+# Boundary, Compound Boundary
 def test_gone_1x1_board():
     input_board = [[TileTypes.WHITE]]
 
@@ -21,7 +21,7 @@ def test_gone_1x1_board():
     assert results.max_rounds() == 0
     assert not results.any_black_remaining()
 
-# Structured Basis, Data Flow, Boundary
+# Structured Basis, Data Flow, Boundary, Compound Boundary
 def test_gone_basic_board():
     input_board, _ = _generate_basic_test_board()
 
@@ -43,7 +43,7 @@ def test_gone_some_black_remaining():
     assert results.max_rounds() == 0
     assert results.any_black_remaining()
 
-# Boundary
+# Boundary, Compound Boundary
 TEST_BOARDS = [
     (
         [
