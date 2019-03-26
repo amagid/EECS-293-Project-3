@@ -1,3 +1,4 @@
+import pytest
 from gone.search_position import SearchPosition
 
 # Helper method to check if two SearchPositions have the same coordinates
@@ -58,6 +59,13 @@ def test_neighbors_returns_invalid_neighbors_too():
 
         assert found
 
+# Bad Data
+def test_neighbors_bad_position():
+    search_position = SearchPosition(None, None, 0)
+
+    with pytest.raises(TypeError):
+        neighbors = search_position.neighbors()
+
 # Boundary
 def test_increment_round_on_0():
     search_position = SearchPosition(0, 0, 0)
@@ -73,3 +81,9 @@ def test_increment_round_on_mid_number():
     search_position.increment_round()
 
     assert search_position.round == 6
+
+def test_increment_round_on_bad_round():
+    search_position = SearchPosition(0, 0, None)
+
+    with pytest.raises(TypeError):
+        search_position.increment_round()
