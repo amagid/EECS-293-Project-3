@@ -117,7 +117,7 @@ def test_gone_various_boards(test_case):
     assert results.max_rounds() == expected_rounds
     assert results.any_black_remaining() == expected_black_left
 
-HUGE_DIMENSION = 1000000
+HUGE_DIMENSION = 10000
 # Stress
 def test_gone_long_thin_board():
     input_board = [[TileTypes.BLACK] * HUGE_DIMENSION]
